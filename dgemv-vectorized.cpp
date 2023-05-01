@@ -1,3 +1,7 @@
+//included libs to fix errors; malloc, memset, memcpy & free
+#include <stdlib.h>
+#include <string.h>
+
 const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
 /*
  * This routine performs a dgemv operation
