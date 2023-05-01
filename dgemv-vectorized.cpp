@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <cblas.h> //include header file
 
 const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
 
