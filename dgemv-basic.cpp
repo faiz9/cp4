@@ -13,7 +13,7 @@ const char* dgemv_desc = "Basic implementation of matrix-vector multiply.";
  * y[i]=y[i]+A[i,j]*x[j];
  */
   for (int i = 0; i < n; i++) {
-       y[i] += A[i*n] * x[0];   this line has errors row-major
+       y[i] += A[i*n] * x[0];   //this line has errors row-major
         for (int j = 1; j < n; j++) {
             y[i] += A[i*n + j] * x[j]; //accesses i, j
         }
