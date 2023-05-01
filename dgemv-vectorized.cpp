@@ -1,8 +1,8 @@
-//included libs to fix errors; malloc, memset, memcpy & free
 #include <stdlib.h>
 #include <string.h>
 
 const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
+
 /*
  * This routine performs a dgemv operation
  * Y :=  A * X + Y
@@ -10,7 +10,6 @@ const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
  * On exit, A and X maintain their input values.
  */
 void my_dgemv(int n, double* A, double* x, double* y) {
-
    // insert your code here: implementation of vectorized vector-matrix multiply
     double* tmp = (double*) malloc(n * sizeof(double)); // allocate temporary array
     memset(tmp, 0, n * sizeof(double)); // initialize temporary array to zero
@@ -20,7 +19,7 @@ void my_dgemv(int n, double* A, double* x, double* y) {
         for (int j = 0; j < n; j++) {
             tmp[i] += A[i*n + j] * x[j]; // accumulate intermediate results into tmp
         }
-      }
+    }
     // Copy temporary array into y
     memcpy(y, tmp, n * sizeof(double));
     free(tmp); // free temporary array
