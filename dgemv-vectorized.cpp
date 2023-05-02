@@ -11,17 +11,22 @@ const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
  * On exit, A and X maintain their input values.
  */
 void my_dgemv(int n, double* A, double* x, double* y) {
-   // insert your code here: implementation of vectorized vector-matrix multiply
-    double* tmp = (double*) malloc(n * sizeof(double)); // allocate temporary array
-    memset(tmp, 0, n * sizeof(double)); // initialize temporary array to zero
-    // Outer loop: iterate over rows of A
-    for (int i = 0; i < n; i++) {
-        // Inner loop: iterate over columns of A and x
+   double alpha = 1.0, beta = 1.0;
+    int lda = n, incx = 1, incy = 1;
+
+    // Clear y vector
+    memset(y, 0, n * sizeof(double));
+
+    // Loop unrolling by 2
+    for (int i = 0; i < n; i += 2) {
+        double sum1 = 0.0, sum2 = 0.0;
+
         for (int j = 0; j < n; j++) {
-            tmp[i] += A[i*n + j] * x[j]; // accumulate intermediate results into tmp
+            sum1 += A[i * n + j] * x[j];
+            sum2 += A[(i + 1) * n + j] * x[j];
         }
+
+        y[i] += sum1;
+        y[i + 1] += sum2;
     }
-    // Copy temporary array into y
-    memcpy(y, tmp, n * sizeof(double));
-    free(tmp); // free temporary array
 }
