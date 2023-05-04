@@ -5,22 +5,12 @@
 
 const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
 
-
-/* void my_dgemv(int n, double* A, double* x, double* y) {
-    // insert your code here: implementation of vectorized vector-matrix multiply
-    double* tmp = (double*) malloc(n * sizeof(double)); // allocate temporary array
-    memset(tmp, 0, n * sizeof(double)); // initialize temporary array to zero
-    // Outer loop: iterate over rows of A
-    for (int i = 0; i < n; i++) {
-        // Inner loop: iterate over columns of A and x
-        for (int j = 0; j < n; j++) {
-            tmp[i] += A[i*n + j] * x[j]; // accumulate intermediate results into tmp
-        }
-    }
-    // Copy temporary array into y
-    memcpy(y, tmp, n * sizeof(double));
-    free(tmp); // free temporary array
-} */
+/*
+ * This routine performs a dgemv operation
+ * Y :=  A * X + Y
+ * where A is n-by-n matrix stored in row-major format, and X and Y are n by 1 vectors.
+ * On exit, A and X maintain their input values.
+ */
 
 //Vectorization Analogy: Loop Unrolling April 18th
 void my_dgemv(int n, double* A, double* x, double* y) {
@@ -35,7 +25,7 @@ void my_dgemv(int n, double* A, double* x, double* y) {
             temp += A[i * n + j + 3] * x[j + 3];
         }
 
-        // Handle remaining elements (if n is not divisible by 4)
+        // Remaining elements if n not divisible by 4
         for (int j = n - (n % 4); j < n; j++) {
             temp += A[i * n + j] * x[j];
         }
