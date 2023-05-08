@@ -31,7 +31,7 @@ void my_dgemv(int n, double* A, double* x, double* y) {
 
 		#pragma omp parallel for //inner loop
         for (int j = 1; j < n; j++) {
-           
+           // #pragma omp atomic prevents thread issues 
             y[i] += A[i * n + j] * x[j]; // Remaining elements of y[i]
         }
     }
