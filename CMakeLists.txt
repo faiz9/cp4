@@ -64,10 +64,10 @@ set(BENCHMARK "openmp")
 configure_file(job.in job-${BENCHMARK})
 
 add_executable(benchmark-openmp-inner dgemv-openmp-inner.cpp)
-target_link_libraries(benchmark-openmp-inner PRIVATE benchmark ${BLAS_LIBRARIES})
-target_link_options(benchmark-openmp-inner PRIVATE -fopenmp)
-target_compile_features(benchmark-openmp-inner PRIVATE c_std_11 c_restrict)
-target_compile_options(benchmark-openmp-inner PRIVATE -fopenmp -Wall -pedantic -march=native -O1)
+target_link_libraries(benchmark-openmp-inner  PRIVATE benchmark ${BLAS_LIBRARIES})
+target_link_options(benchmark-openmp-inner  PRIVATE -fopenmp)
+target_compile_features(benchmark-openmp-inner  PRIVATE c_std_11 c_restrict)
+target_compile_options(benchmark-openmp-inner  PRIVATE -fopenmp -Wall -pedantic -march=native -O1)
 set(BENCHMARK "openmp")
 configure_file(job.in job-${BENCHMARK})
 
@@ -87,6 +87,4 @@ target_compile_options(benchmark-openmp-nested PRIVATE -fopenmp -Wall -pedantic 
 set(BENCHMARK "openmp")
 configure_file(job.in job-${BENCHMARK})
 
-
 # EOF
-
