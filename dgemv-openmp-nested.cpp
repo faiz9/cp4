@@ -26,11 +26,9 @@ void my_dgemv(int n, double* A, double* x, double* y) {
    // nthreads and thread_id so as to not taint your timings
     #pragma omp parallel for
     for (int i = 0; i < n; i++) {
-        #pragma omp atomic
-        y[i] += A[i * n] * x[0]; // First element of y[i]
-        for (int j = 1; j < n; j++) {
-            #pragma omp atomic
-            y[i] += A[i * n + j] * x[j]; // Remaining elements of y[i]
+        #pragma omp parallel for
+       for (int j = 0; j < n; j++) {
+           y[i] += A[i * n + j] * x[j];
         }
     }
 }
