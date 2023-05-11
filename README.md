@@ -18,15 +18,23 @@ Credits To Dr. E Wes Bethel
 
 # Running Instructions:
 
-1 - ssh into CORI using terminal
-2 - Git clone <repo link>
-3 - cd <repo>
-4 - mkdir build
-5 - cd build
-6 - cmake ../
-7 - make
-8 - module load PrgEnv-intel
-9 - salloc --nodes=1 --qos=interactive --time=01:00:00 --constraint=knl --account=m3930
+ssh into CORI using terminal
+
+Git clone <repo link>
+   
+cd <repo>
+   
+mkdir build
+   
+cd build
+   
+cmake ../
+   
+make
+   
+module load PrgEnv-intel 
+   
+salloc --nodes=1 --qos=interactive --time=01:00:00 --constraint=knl --account=m3930
    
    `srun ./benchmark-basic`  
    or  
